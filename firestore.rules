@@ -3,9 +3,10 @@ service cloud.firestore {
   match /databases/{database}/documents {
 
     // Accounts allowed into admin.html. Add more e-mails to the list if needed.
+    // shortcut: agency account only until the owners' autoremar@autoremar.pl user exists in Firebase Auth.
     function isAdmin() {
       return request.auth != null
-        && request.auth.token.email in ['autoremar@autoremar.pl'];
+        && request.auth.token.email in ['savva.ihor@gmail.com'];
     }
 
     function str(v, min, max) {
