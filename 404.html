@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<script>
+// GitHub Pages serves this page at any missing path, so relative links need a <base>.
+// shortcut: assumes a project site (user.github.io/repo/) or own domain; a user site at github.io root would get a wrong base.
+(function () {
+  var p = location.pathname, base = "/";
+  if (/\.github\.io$/.test(location.hostname) && p.split("/")[1]) base = "/" + p.split("/")[1] + "/";
+  document.write('<base href="' + base + '">');
+  // Old Joomla addresses: /index.php/galeria, /index.php/gdzie-jestesmy, ...
+  var u = decodeURIComponent(p + location.search).toLowerCase();
+  if (u.indexOf("index.php") > -1) {
+    location.replace(base + (u.indexOf("galeria") > -1 ? "o-nas.html#galeria"
+      : u.indexOf("gdzie-jestesmy") > -1 ? "kontakt.html" : "index.html"));
+  }
+})();
+</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nie znaleziono strony | AUTO-REMAR</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&amp;display=swap">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<header class="site-head">
+  <div class="wrap">
+    <a class="brand" href="index.html"><span class="brand-mark">AUTO-REMAR</span><span class="brand-sub">mgr inż. Bartosz Smakowski i mgr inż. Marek Smakowski</span></a>
+  </div>
+</header>
+<main id="main">
+  <section class="page-head">
+    <div class="wrap">
+      <h1>Nie znaleziono strony</h1>
+      <p>Ten adres nie istnieje albo zmienił się po przebudowie strony. / This page does not exist.</p>
+    </div>
+  </section>
+  <section class="section">
+    <div class="wrap">
+      <p><a class="btn btn-navy" href="index.html">Strona główna</a> <a class="btn btn-line-navy" href="kontakt.html">Kontakt</a> <a class="btn btn-line-navy" href="en/index.html" lang="en">English</a></p>
+      <p>Tel. <a href="tel:+48228632121">22 863 21 21</a></p>
+    </div>
+  </section>
+</main>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Panel | AUTO-REMAR</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&amp;display=swap">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<header class="site-head">
+  <div class="wrap">
+    <a class="brand" href="index.html"><span class="brand-mark">AUTO-REMAR</span><span class="brand-sub">Panel administracyjny</span></a>
+  </div>
+</header>
+
+<main class="admin">
+  <h1>Panel administracyjny</h1>
+  <p class="form-msg" id="admin-msg" role="status" aria-live="polite"></p>
+
+  <form class="form admin-login" id="login" hidden>
+    <div class="field"><label for="a-email">E-mail</label><input id="a-email" name="email" type="email" autocomplete="username" required></div>
+    <div class="field"><label for="a-pass">Hasło</label><input id="a-pass" name="password" type="password" autocomplete="current-password" required></div>
+    <p style="margin:16px 0 0"><button class="btn btn-navy" type="submit">Zaloguj</button></p>
+  </form>
+
+  <section id="panel" hidden>
+    <div class="admin-bar"><span>Zalogowano: <strong id="who"></strong></span><button class="btn btn-line-navy" id="logout" type="button">Wyloguj</button></div>
+
+    <div class="tabs" role="tablist">
+      <button type="button" role="tab" id="tab-b" aria-controls="panel-b" aria-selected="true">Zgłoszenia</button>
+      <button type="button" role="tab" id="tab-p" aria-controls="panel-p" aria-selected="false">Cennik</button>
+    </div>
+
+    <div role="tabpanel" id="panel-b" aria-labelledby="tab-b" class="admin-scroll">
+      <table>
+        <thead><tr><th>Wpłynęło</th><th>Klient</th><th>Auto</th><th>Usługa</th><th>Termin</th><th>Komentarz</th><th>Status</th></tr></thead>
+        <tbody id="bookings"><tr><td colspan="7">Ładowanie…</td></tr></tbody>
+      </table>
+    </div>
+
+    <div role="tabpanel" id="panel-p" aria-labelledby="tab-p" hidden>
+      <p>Cennik na stronie (PL i EN). Cena w złotych brutto; „+ materiały” dopisuje informację, że części są liczone osobno.</p>
+      <div class="admin-scroll">
+        <table>
+          <thead><tr><th>Usługa (PL)</th><th>Usługa (EN)</th><th>Cena, zł</th><th>+ materiały</th><th></th></tr></thead>
+          <tbody id="price-rows"></tbody>
+        </table>
+      </div>
+      <p class="admin-actions">
+        <button class="btn btn-line-navy" type="button" id="add-row">Dodaj pozycję</button>
+        <button class="btn btn-line-navy" type="button" id="fill-static">Wypełnij z obecnego cennika</button>
+        <button class="btn btn-navy" type="button" id="save-prices">Zapisz cennik</button>
+      </p>
+    </div>
+  </section>
+</main>
+<script type="module" src="assets/js/admin.js"></script>
+</body>
+</html>

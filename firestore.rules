@@ -1,0 +1,42 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Accounts allowed into admin.html. Add more e-mails to the list if needed.
+    function isAdmin() {
+      return request.auth != null
+        && request.auth.token.email in ['autoremar@autoremar.pl'];
+    }
+
+    function str(v, min, max) {
+      return v is string && v.size() >= min && v.size() <= max;
+    }
+
+    // Must match the object built in assets/js/booking.js.
+    function validBooking(d) {
+      let keys = ['service', 'car', 'year', 'date', 'name', 'phone', 'email', 'comment', 'lang', 'status', 'createdAt'];
+      return d.keys().hasOnly(keys) && d.keys().hasAll(keys)
+        && str(d.service, 0, 100)
+        && str(d.car, 0, 100)
+        && str(d.year, 0, 4)
+        && str(d.date, 0, 10)
+        && str(d.name, 0, 100)
+        && str(d.phone, 5, 30)
+        && str(d.email, 0, 120)
+        && str(d.comment, 0, 1000)
+        && d.lang in ['pl', 'en']
+        && d.status == 'new'
+        && d.createdAt == request.time;
+    }
+
+    match /bookings/{id} {
+      allow create: if validBooking(request.resource.data);
+      allow read, update, delete: if isAdmin();
+    }
+
+    match /prices/current {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+  }
+}
