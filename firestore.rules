@@ -17,7 +17,7 @@ service cloud.firestore {
     function validBooking(d) {
       let keys = ['service', 'car', 'year', 'date', 'name', 'phone', 'email', 'comment', 'lang', 'status', 'createdAt'];
       return d.keys().hasOnly(keys) && d.keys().hasAll(keys)
-        && str(d.service, 0, 100)
+        && str(d['service'], 0, 100)
         && str(d.car, 0, 100)
         && str(d.year, 0, 4)
         && str(d.date, 0, 10)
